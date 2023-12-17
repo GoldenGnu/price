@@ -9,7 +9,7 @@
     <distributionManagement>
         <repository>
             <id>nikr-maven-repository</id>
-            <url>ftp://maven.nikr.net/maven.nikr.net</url>
+            <url>ftps://maven.nikr.net/maven.nikr.net</url>
         </repository>
     </distributionManagement>
     <build>
