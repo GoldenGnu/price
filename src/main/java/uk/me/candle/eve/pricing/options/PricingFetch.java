@@ -22,19 +22,12 @@ package uk.me.candle.eve.pricing.options;
 
 import java.util.List;
 import uk.me.candle.eve.pricing.Pricing;
-import uk.me.candle.eve.pricing.impl.EveMarketer;
 import uk.me.candle.eve.pricing.impl.EveTycoon;
 import uk.me.candle.eve.pricing.impl.Fuzzwork;
 import uk.me.candle.eve.pricing.impl.Janice;
 
 
 public enum PricingFetch {
-    EVEMARKETER {
-        @Override
-        public Pricing getNewInstance() {
-            return new EveMarketer();
-        }
-    },
     FUZZWORK {
         @Override
         public Pricing getNewInstance() {
