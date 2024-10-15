@@ -50,11 +50,12 @@ public class Janice extends AbstractPricing {
     public static enum JaniceLocation {
         JITA_4_4("Jita 4-4", 2),
         R1O_GN("R1O-GN", 3),
-        PERIMETER_TTT("Perimeter TTT", 4),
-        JITA_4_4_AND_PERIMETER_TTT("Jita 4-4 + Perimeter TTT", 5),
         NPC("NPC", 6),
         MJ_5F9("MJ-5F9", 114),
-        AMARR("Amarr", 115)
+        AMARR("Amarr", 115),
+        RENS("Rens", 116),
+        DODIXIE("Dodixie", 117),
+        HEK("Hek", 118)
         ;
         private final NamedPriceLocation priceLocation;
 

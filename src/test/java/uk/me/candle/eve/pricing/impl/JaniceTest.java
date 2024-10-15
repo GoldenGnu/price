@@ -45,63 +45,24 @@ public class JaniceTest extends PricingTests {
     }
 
     @Test
-    public void testGetPriceOnlineJita() {
-        Pricing pricing = PricingFactory.getPricing(PricingFetch.JANICE, new DefaultPricingOptions() {
-            @Override
-            public PriceLocation getLocation() {
-                return JaniceLocation.JITA_4_4.getPriceLocation();
+    public void testGetPriceOnline() {
+        for (JaniceLocation location : JaniceLocation.values()) {
+            Pricing pricing = PricingFactory.getPricing(PricingFetch.JANICE, new DefaultPricingOptions() {
+                @Override
+                public PriceLocation getLocation() {
+                    return JaniceLocation.JITA_4_4.getPriceLocation();
+                }
+                @Override
+                public LocationType getLocationType() {
+                    return LocationType.STATION;
+                }
+            });
+            if (janiceKey != null) {
+                pricing.getPricingOptions().addHeader("X-ApiKey", janiceKey);
+            } else {
+                fail("janiceKey is null");
             }
-            @Override
-            public LocationType getLocationType() {
-                return LocationType.STATION;
-            }
-        });
-        if (janiceKey != null) {
-            pricing.getPricingOptions().addHeader("X-ApiKey", janiceKey);
-        } else {
-            fail("janiceKey is null");
+            testAll(pricing, location.toString());
         }
-        testAll(pricing, "Jita 4-4");
     }
-
-    @Test
-    public void testGetPriceOnlinePerimeter() {
-        Pricing pricing = PricingFactory.getPricing(PricingFetch.JANICE, new DefaultPricingOptions() {
-            @Override
-            public PriceLocation getLocation() {
-                return JaniceLocation.PERIMETER_TTT.getPriceLocation();
-            }
-            @Override
-            public LocationType getLocationType() {
-                return LocationType.STATION;
-            }
-        });
-        if (janiceKey != null) {
-            pricing.getPricingOptions().addHeader("X-ApiKey", janiceKey);
-        } else {
-            fail("janiceKey is null");
-        }
-        testAll(pricing, "Perimeter TTT");
-    }
-
-    @Test
-    public void testGetPriceOnlineJitaPerimeter() {
-        Pricing pricing = PricingFactory.getPricing(PricingFetch.JANICE, new DefaultPricingOptions() {
-            @Override
-            public PriceLocation getLocation() {
-                return JaniceLocation.JITA_4_4_AND_PERIMETER_TTT.getPriceLocation();
-            }
-            @Override
-            public LocationType getLocationType() {
-                return LocationType.STATION;
-            }
-        });
-        if (janiceKey != null) {
-            pricing.getPricingOptions().addHeader("X-ApiKey", janiceKey);
-        } else {
-            fail("janiceKey is null");
-        }
-        testAll(pricing, "Jita 4-4 + Perimeter TTT");
-    }
-
 }
