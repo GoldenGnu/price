@@ -75,6 +75,10 @@ public class Janice extends AbstractPricing {
             }
             return null;
         }
+
+        public static boolean isValid(long locationID) {
+            return getLocation(locationID) != null;
+        }
     }
 
     public Janice() {
@@ -101,14 +105,10 @@ public class Janice extends AbstractPricing {
     @Override
     public List<Long> getSupportedLocations(LocationType locationType) {
         if (getSupportedLocationTypes().contains(locationType)) {
-            ArrayList<Long> list = new ArrayList<>();
-            list.add(2L); //Jita 4-4
-            list.add(3L); //R1O-GN
-            list.add(4L); //Perimeter TTT
-            list.add(5L); //Jita 4-4 + Perimeter TTT
-            list.add(6L); //NPC
-            list.add(114L); //MJ-5F9
-            list.add(115L); //Amarr
+            List<Long> list = new ArrayList<>();
+            for (JaniceLocation janiceLocation : JaniceLocation.values()) {
+                list.add(janiceLocation.getPriceLocation().getLocationID());
+            }
             return list;
         }
         return null;
@@ -139,14 +139,7 @@ public class Janice extends AbstractPricing {
             throw new UnsupportedOperationException(locationType + " is not supported by Janice");
         }
         long locationID = getPricingOptions().getLocationID();
-        if (locationID != 2 //Jita 4-4 == 60003760L
-            && locationID != 3 //R1O-GN (Ignore?)
-            && locationID != 4 //Perimeter TTT
-            && locationID != 5 //Jita 4-4 + Perimeter TTT
-            && locationID != 6 //NPC
-            && locationID != 114 //MJ-5F9  (Ignore?)
-            && locationID != 115 //Amarr
-                ) {
+        if (!JaniceLocation.isValid(locationID)) {
             throw new UnsupportedOperationException(locationID + " is not supported by Janice");
         }
         //Update
