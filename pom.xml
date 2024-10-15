@@ -9,7 +9,8 @@
     <distributionManagement>
         <repository>
             <id>nikr-maven-repository</id>
-            <url>ftp://maven.nikr.net/maven.nikr.net</url>
+            <url>${upload.maven}</url>
+            <layout>default</layout>
         </repository>
     </distributionManagement>
     <build>
@@ -54,12 +55,12 @@
             </plugin>
         </plugins>
         <extensions>
-            <!-- Enabling the use of FTP -->
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ftp</artifactId>
-                <version>2.5</version>
-            </extension>
+            <!-- Enabling the use of SSH -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>3.5.2</version>
+			</extension>
         </extensions>
     </build>
 
